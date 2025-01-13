@@ -36,6 +36,13 @@ const resolvers = {
           context.user._id,
           { $addToSet: { savedBooks: bookData } },
           { new: true, runValidators: true }
+    updateUser: async (_parent, { id, username, email, password }) => {
+      return User.findByIdAndUpdate(
+        id,
+        { username, email, password },
+        { new: true }
+      );
+      deleteUser: async (_parent, { id }) => {
         );
       }
       throw new Error('Not authenticated');

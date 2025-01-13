@@ -1,3 +1,6 @@
+import typeDefs from './typeDefs.js';
+import resolvers from './resolvers.js';
+
 declare namespace Express {
   interface Request {
     user: {
@@ -6,3 +9,6 @@ declare namespace Express {
     };
   }
 }
+
+
+export { typeDefs, resolvers };

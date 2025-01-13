@@ -18,16 +18,15 @@ export const authenticateToken = (req: Request, res: Response, next: NextFunctio
 
     const secretKey = process.env.JWT_SECRET_KEY || '';
 
-    jwt.verify(token, secretKey, (err, user) => {
-      if (err) {
-        return res.sendStatus(403); // Forbidden
-      }
+    try {
+      const user = jwt.verify(token, secretKey) as JwtPayLoad;
+      return user;
+    } catch (err) {
+      throw new Error('Invalid token');
 
-      req.user = user as JwtPayload;
-      return next();
-    });
+    }
   } else {
-    res.sendStatus(401); // Unauthorized
+    res.sendStatus(401);
   }
 };
 

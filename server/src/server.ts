@@ -28,7 +28,7 @@ app.use(
   expressMiddleware(server, {
     context: async ({ req }) => {
       const token = req.headers.authorization || '';
-      const user = authenticateToken(token);
+      const user = authenticateToken(token, req, res);
       return { user };
     },
   })
